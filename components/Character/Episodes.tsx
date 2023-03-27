@@ -8,7 +8,7 @@ interface Props {
 
 const Episode = ({ episodes }: Props) => (
   <>
-    <Typography variant="h5" sx={{ pt: "35px" }}>
+    <Typography variant="h4" sx={{ pt: "35px" }}>
       Featured Episodes
     </Typography>
     <Box
