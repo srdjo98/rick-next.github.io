@@ -50,7 +50,7 @@ const Characters = ({ characters }: Props) => {
                     },
                   }}
                 >
-                  <Typography variant="body2" sx={{ pt: "2px" }}>
+                  <Typography variant="body2" sx={{ pt: "0.125rem" }}>
                     Explore Character
                   </Typography>
                 </Button>

@@ -32,12 +32,12 @@ const CharacterPage = ({ id }: { id: string }) => {
   return (
     <Grid container>
       <Grid item xs={6}>
-        <Box sx={{ pt: "25px" }}>
+        <Box sx={{ pt: "1.563rem" }}>
           <SingleCharacter character={character} />
         </Box>
       </Grid>
       <Grid item xs={6}>
-        <Box sx={{ bgcolor: "white", mt: "41px", height: "90%" }}></Box>
+        <Box sx={{ bgcolor: "white", mt: "2.563rem", height: "90%" }}></Box>
       </Grid>
       <Grid item xs={12}>
         <Episode episodes={character.episode} />

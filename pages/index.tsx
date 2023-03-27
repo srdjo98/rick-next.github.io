@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ pt: "10px", pb: "2px" }}>
+      <Typography variant="h4" sx={{ pt: "0.625rem", pb: "0.125rem" }}>
         Featured Characters
       </Typography>
       <Box

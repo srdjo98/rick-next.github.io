@@ -31,7 +31,7 @@ const SingleCharacter = ({ character }: Props) => (
         <Typography
           variant="body1"
           color="text.secondary"
-          sx={{ pt: "5px", pb: "5px" }}
+          sx={{ pt: "0.313rem", pb: "0.313rem" }}
         >
           Location - {character.location.name}
         </Typography>

@@ -15,14 +15,14 @@ const Episode = ({ episodes }: Props) => (
       sx={{
         display: "flex",
         justifyContent: "space-between",
-        gap: "10px",
-        pt: "25px",
+        gap: "0.625rem",
+        pt: "1.563rem",
       }}
     >
       {episodes?.slice(0, 3).map((e: EpisodeProp) => (
         <Paper
           elevation={7}
-          sx={{ width: "250px", height: "auto" }}
+          sx={{ width: "15.625rem", height: "auto" }}
           key={e.name}
         >
           <Typography
@@ -35,7 +35,7 @@ const Episode = ({ episodes }: Props) => (
             <Typography sx={{ fontSize: "17px" }}>
               Episode - {e.name}
             </Typography>
-            <PlayCircleIcon sx={{ fontSize: "60px" }} />
+            <PlayCircleIcon sx={{ fontSize: "3.75rem" }} />
           </Box>
           <Typography sx={{ color: "white", bgcolor: "black" }}>
             {e.air_date}

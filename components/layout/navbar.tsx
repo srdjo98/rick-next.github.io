@@ -18,7 +18,7 @@ const Navbar = () => (
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, pl: "20px" }}
+            sx={{ flexGrow: 1, pl: "1.25rem" }}
           >
             Locations
           </Typography>
