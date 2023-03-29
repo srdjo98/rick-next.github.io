@@ -9,6 +9,6 @@ export const status: FilterProps[] = [
 ];
 
 export const genders: FilterProps[] = [
-  { value: "female", label: "Female" },
-  { value: 'male', label: 'Male' },
+  { value: 'female', label: 'Female' },
+  { value: "male", label: "Male" },
 ];

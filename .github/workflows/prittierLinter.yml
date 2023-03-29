@@ -2,17 +2,21 @@ name: Prettier Linter
 
 on: push
 
-jobs: 
-  super-linter: 
+permissions:
+  checks: write
+  contents: write
+
+jobs:
+  super-linter:
     name: Lint code base
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
+
       - name: Install Node.js dependencies
         run: npm ci
-      - name: run linters
+      - name: Run linters
         uses: wearerequired/lint-action@v2
-        with: 
+        with:
           prettier: true
