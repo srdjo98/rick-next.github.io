@@ -1,22 +1,16 @@
-import { CardContent, CardMedia, Typography } from "@mui/material";
-import { Character } from "./Character";
-import Image from "next/image";
-import { CharacterProp } from "@/pages/[id]";
-
+import { CardContent, CardMedia, Typography } from '@mui/material';
+import { Character } from './Character';
+import Image from 'next/image';
+import { CharacterProps } from '@/pages/[id]';
 interface Props {
-  character: CharacterProp;
+  character: CharacterProps;
 }
 
-const SingleCharacter = ({ character }: Props) => (
+export const SingleCharacter = ({ character }: Props) => (
   <Character
     characterImage={
       <CardMedia>
-        <Image
-          src={character.image!}
-          alt={character.name}
-          height={210}
-          width={250}
-        />
+        <Image src={character.image!} alt={character.name} height={210} width={250} />
       </CardMedia>
     }
     characterBody={
@@ -31,7 +25,7 @@ const SingleCharacter = ({ character }: Props) => (
         <Typography
           variant="body1"
           color="text.secondary"
-          sx={{ pt: "0.313rem", pb: "0.313rem" }}
+          sx={{ pt: '0.313rem', pb: '0.313rem' }}
         >
           Location - {character.location.name}
         </Typography>
@@ -43,5 +37,3 @@ const SingleCharacter = ({ character }: Props) => (
     }
   />
 );
-
-export default SingleCharacter;

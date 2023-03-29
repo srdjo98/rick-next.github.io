@@ -1,6 +1,11 @@
 import axios from "axios";
 
-export const getCharacters = () =>
+interface FilterDataProps {
+  gender: string;
+  status: string;
+}
+
+export const getCharacters = (filter?: any) =>
   axios
     .post(
       "https://rickandmortyapi.com/graphql",
@@ -56,6 +61,32 @@ export const getCharacter = (id: string) =>
     )
     .then((res: any) => res.data);
 
+export const filterCharacters = (filterData: FilterDataProps) =>
+  axios
+    .post(
+      "https://rickandmortyapi.com/graphql",
+      {
+        query: `query characters ($filter: FilterCharacter) {
+            characters (filter: $filter) {
+              results {
+                id
+                name
+                status
+                species
+                image
+              }
+            }
+          }`,
+        variables: { filter: filterData },
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((res: any) => res.data);
+
 export const getLocations = () =>
   axios
     .post(
@@ -64,6 +95,7 @@ export const getLocations = () =>
         query: `query locations  {
           locations {
             results {
+              id
               name
               dimension
             }

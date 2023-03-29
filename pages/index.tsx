@@ -1,10 +1,13 @@
-import Characters from "@/components/Character/Characters";
-import { getCharacters } from "@/graphql/query";
-import { Box, Typography } from "@mui/material";
+import { Characters } from '@/components/Character/Characters';
+import { SelectInput } from '@/components/UI/SelectInput';
+import { getCharacters } from '@/graphql/query';
+import { genders, status } from '@/utils';
+import { Box, Button, FormControl, MenuItem, Select, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
+import { Controller, useForm } from 'react-hook-form';
+import { QueryClient, dehydrate, useQuery } from 'react-query';
 
-import { QueryClient, dehydrate, useQuery } from "react-query";
-
-export interface CharactersProp {
+export interface CharactersProps {
   id: number;
   name: string;
   status: string;
@@ -13,26 +16,56 @@ export interface CharactersProp {
 }
 
 export default function Home() {
-  const { data, isLoading } = useQuery("characters", getCharacters);
+  const { data, isLoading } = useQuery('characters', getCharacters);
+  const { control, handleSubmit } = useForm();
+  const router = useRouter();
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  const characters: CharactersProp[] = data.data.characters.results.filter(
-    (char: CharactersProp) => char.species !== "Alien" && char.id <= 7
+  const characters: CharactersProps[] = data.data.characters.results.filter(
+    (char: CharactersProps) => char.species !== 'Alien' && char.id <= 7,
   );
+
+  const onSubmit = (data: { gender?: string; status?: string }) => {
+    router.push(`/${data.gender}/${data.status}`);
+  };
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ pt: "0.625rem", pb: "0.125rem" }}>
+      <Typography variant="h5" sx={{ pb: '0.6rem' }}>
+        Filter By
+      </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <SelectInput
+          name="gender"
+          defaultValue="male"
+          menuItems={genders}
+          control={control}
+        />
+        <SelectInput
+          name="status"
+          defaultValue="dead"
+          menuItems={status}
+          control={control}
+        />
+        <Button
+          sx={(theme) => ({ bgcolor: theme.palette.primary.main })}
+          variant="contained"
+          type="submit"
+        >
+          Filter
+        </Button>
+      </form>
+      <Typography variant="h4" sx={{ pt: '0.625rem', pb: '0.125rem' }}>
         Featured Characters
       </Typography>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
         }}
       >
         <Characters characters={characters} />
@@ -44,7 +77,7 @@ export default function Home() {
 export const getStaticProps = async () => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery("characters", getCharacters);
+  await queryClient.prefetchQuery('characters', getCharacters);
 
   return {
     props: {

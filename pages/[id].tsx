@@ -1,38 +1,38 @@
-import { GetStaticProps } from "next";
-import { QueryClient, dehydrate, useQuery } from "react-query";
-import Episode from "@/components/Character/Episodes";
-import SingleCharacter from "@/components/Character/SingleCharacter";
-import { getCharacter } from "@/graphql/query";
+import { GetStaticProps } from 'next';
+import { QueryClient, dehydrate, useQuery } from 'react-query';
+import Episode from '@/components/Episodes/Episodes';
+import { SingleCharacter } from '@/components/Character/SingleCharacter';
+import { getCharacter } from '@/graphql/query';
+import { Box, Grid } from '@mui/material';
 
-import { Box, Grid } from "@mui/material";
-
-export interface LocationProp {
+export interface LocationProps {
+  id: string;
   name: string;
   dimension: string;
 }
 
-export interface EpisodeProp {
+export interface EpisodeProps {
   name: string;
   air_date: string;
   episode: string;
 }
 
-export interface CharacterProp {
+export interface CharacterProps {
   name: string;
   gender: string;
   image: string;
-  location: LocationProp;
-  episode: EpisodeProp[];
+  location: LocationProps;
+  episode: EpisodeProps[];
 }
 
 const CharacterPage = ({ id }: { id: string }) => {
-  const { data } = useQuery("character", () => getCharacter(id));
-  const character: CharacterProp = data.data.character;
+  const { data } = useQuery('character', () => getCharacter(id));
+  const character: CharacterProps = data.data.character;
 
   return (
     <Grid container>
       <Grid item xs={6}>
-        <Box sx={{ pt: "1.563rem" }}>
+        <Box sx={{ pt: '1.563rem' }}>
           <SingleCharacter character={character} />
         </Box>
       </Grid>
@@ -51,9 +51,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const charId = params?.id;
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery("character", () =>
-    getCharacter(charId as string)
-  );
+  await queryClient.prefetchQuery('character', () => getCharacter(charId as string));
 
   return {
     props: {
@@ -66,14 +64,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export const getStaticPaths = async () => {
   return {
     paths: [
-      { params: { id: "1" } },
-      { params: { id: "2" } },
-      { params: { id: "3" } },
-      { params: { id: "4" } },
-      { params: { id: "5" } },
-      { params: { id: "7" } },
+      { params: { id: '1' } },
+      { params: { id: '2' } },
+      { params: { id: '3' } },
+      { params: { id: '4' } },
+      { params: { id: '5' } },
+      { params: { id: '7' } },
     ],
-    fallback: false,
+    fallback: true,
   };
 };
 
