@@ -2,9 +2,9 @@ import { Characters } from '@/components/Character/Characters';
 import { SelectInput } from '@/components/UI/SelectInput';
 import { getCharacters } from '@/graphql/query';
 import { genders, status } from '@/utils';
-import { Box, Button, FormControl, MenuItem, Select, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { QueryClient, dehydrate, useQuery } from 'react-query';
 
 export interface CharactersProps {
@@ -25,7 +25,7 @@ export default function Home() {
   }
 
   const characters: CharactersProps[] = data.data.characters.results.filter(
-    (char: CharactersProps) => char.species !== 'Alien' && char.id <= 7,
+    (c: CharactersProps) => c.species !== 'Alien' && c.id <= 7,
   );
 
   const onSubmit = (data: { gender?: string; status?: string }) => {
@@ -34,31 +34,31 @@ export default function Home() {
 
   return (
     <Box>
-      <Typography variant="h5" sx={{ pb: '0.6rem' }}>
+      <Typography variant='h5' sx={{ pb: '0.6rem' }}>
         Filter By
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SelectInput
-          name="gender"
-          defaultValue="male"
+          name='gender'
+          defaultValue='male'
           menuItems={genders}
           control={control}
         />
         <SelectInput
-          name="status"
-          defaultValue="dead"
+          name='status'
+          defaultValue='dead'
           menuItems={status}
           control={control}
         />
         <Button
           sx={(theme) => ({ bgcolor: theme.palette.primary.main })}
-          variant="contained"
-          type="submit"
+          variant='contained'
+          type='submit'
         >
           Filter
         </Button>
       </form>
-      <Typography variant="h4" sx={{ pt: '0.625rem', pb: '0.125rem' }}>
+      <Typography variant='h4' sx={{ pt: '0.625rem', pb: '0.125rem' }}>
         Featured Characters
       </Typography>
       <Box

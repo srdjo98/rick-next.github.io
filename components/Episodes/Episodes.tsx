@@ -1,6 +1,6 @@
-import { Box, Paper, Typography } from '@mui/material';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { EpisodeProps } from '@/pages/[id]';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import { Box, Paper, Typography } from '@mui/material';
 
 interface Props {
   episodes: EpisodeProps[];
@@ -9,7 +9,7 @@ interface Props {
 const Episode = ({ episodes }: Props) => (
   <>
     <Typography
-      variant="h4"
+      variant='h4'
       sx={{
         pt: '35px',
       }}
@@ -34,7 +34,7 @@ const Episode = ({ episodes }: Props) => (
           key={e.name}
         >
           <Typography
-            variant="subtitle1"
+            variant='subtitle1'
             sx={(theme) => ({
               color: 'white',
               bgcolor: theme.palette.primary.main,

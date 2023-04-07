@@ -9,11 +9,16 @@ interface Props {
   control: Control;
 }
 
-export const SelectInput = ({ name, defaultValue, menuItems, control }: Props) => (
+export const SelectInput = ({
+  name,
+  defaultValue,
+  menuItems,
+  control,
+}: Props) => (
   <FormControl sx={{ width: '120px', mr: '20px' }}>
     <Controller
       render={({ field }) => (
-        <Select sx={{ color: 'white' }} variant="standard" {...field}>
+        <Select sx={{ color: 'white' }} variant='standard' {...field}>
           {menuItems.map((m) => (
             <MenuItem key={m.label} value={m.value}>
               {m.label}

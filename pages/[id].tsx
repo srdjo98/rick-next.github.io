@@ -1,9 +1,10 @@
-import { GetStaticProps } from 'next';
-import { QueryClient, dehydrate, useQuery } from 'react-query';
-import Episode from '@/components/Episodes/Episodes';
 import { SingleCharacter } from '@/components/Character/SingleCharacter';
+import Episode from '@/components/Episodes/Episodes';
 import { getCharacter } from '@/graphql/query';
 import { Box, Grid } from '@mui/material';
+import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import { QueryClient, dehydrate, useQuery } from 'react-query';
 
 export interface LocationProps {
   id: string;
@@ -26,18 +27,24 @@ export interface CharacterProps {
 }
 
 const CharacterPage = ({ id }: { id: string }) => {
-  const { data } = useQuery('character', () => getCharacter(id));
-  const character: CharacterProps = data.data.character;
+  const { isLoading, data } = useQuery('character', () => getCharacter(id));
+  const router = useRouter();
+  const character: CharacterProps = data?.data?.character;
+
+  if (router.isFallback || isLoading) {
+    return <p>...Loading</p>;
+  }
+
+  if (data.length === 0) {
+    return <p>No Data</p>;
+  }
 
   return (
     <Grid container>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <Box sx={{ pt: '1.563rem' }}>
           <SingleCharacter character={character} />
         </Box>
-      </Grid>
-      <Grid item xs={6}>
-        <Box sx={{ bgcolor: 'white', mt: '2.563rem', height: '90%' }}></Box>
       </Grid>
       <Grid item xs={12}>
         <Episode episodes={character.episode} />
@@ -51,7 +58,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const charId = params?.id;
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery('character', () => getCharacter(charId as string));
+  await queryClient.prefetchQuery('character', () =>
+    getCharacter(charId as string),
+  );
 
   return {
     props: {

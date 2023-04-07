@@ -1,5 +1,5 @@
-import { ReactElement } from 'react';
 import Card from '@mui/material/Card';
+import { ReactElement } from 'react';
 
 interface Props {
   characterImage: ReactElement;
@@ -7,7 +7,11 @@ interface Props {
   characterActions?: ReactElement;
 }
 
-export const Character = ({ characterImage, characterBody, characterActions }: Props) => (
+export const Character = ({
+  characterImage,
+  characterBody,
+  characterActions,
+}: Props) => (
   <Card sx={{ width: 250, mt: '1rem' }}>
     {characterImage}
     {characterBody}

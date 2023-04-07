@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios from 'axios';
 
 interface FilterDataProps {
   gender: string;
   status: string;
 }
 
-export const getCharacters = (filter?: any) =>
+export const getCharacters = () =>
   axios
     .post(
-      "https://rickandmortyapi.com/graphql",
+      'https://rickandmortyapi.com/graphql',
       {
         query: `query characters {
           characters {
@@ -24,16 +24,16 @@ export const getCharacters = (filter?: any) =>
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      }
+      },
     )
     .then((res: any) => res.data);
 
 export const getCharacter = (id: string) =>
   axios
     .post(
-      "https://rickandmortyapi.com/graphql",
+      'https://rickandmortyapi.com/graphql',
       {
         query: `query character ($id: ID!) {
             character(id: $id) {
@@ -55,16 +55,16 @@ export const getCharacter = (id: string) =>
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      }
+      },
     )
     .then((res: any) => res.data);
 
 export const filterCharacters = (filterData: FilterDataProps) =>
   axios
     .post(
-      "https://rickandmortyapi.com/graphql",
+      'https://rickandmortyapi.com/graphql',
       {
         query: `query characters ($filter: FilterCharacter) {
             characters (filter: $filter) {
@@ -81,19 +81,19 @@ export const filterCharacters = (filterData: FilterDataProps) =>
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      }
+      },
     )
     .then((res: any) => res.data);
 
-export const getLocations = () =>
+export const getLocations = (pageNumber?: number) =>
   axios
     .post(
-      "https://rickandmortyapi.com/graphql",
+      'https://rickandmortyapi.com/graphql',
       {
-        query: `query locations  {
-          locations {
+        query: `query locations ($page: Int) {
+          locations (page: $page) {
             results {
               id
               name
@@ -101,11 +101,12 @@ export const getLocations = () =>
             }
           }
         }`,
+        variables: { page: pageNumber },
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      }
+      },
     )
     .then((res: any) => res.data);

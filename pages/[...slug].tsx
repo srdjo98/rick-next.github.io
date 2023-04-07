@@ -15,10 +15,11 @@ const FilterCharactersPage = () => {
       setGender(router.query.slug?.[0]!);
       setStatus(router.query.slug?.[1]!);
     }
-  }, [router.isReady]);
+  }, [router.isReady, router.query.slug]);
 
-  const { isLoading, data } = useQuery(['filterCharacters', gender, status], () =>
-    filterCharacters({ gender, status }),
+  const { isLoading, data } = useQuery(
+    ['filterCharacters', gender, status],
+    () => filterCharacters({ gender, status }),
   );
 
   if (isLoading) {
