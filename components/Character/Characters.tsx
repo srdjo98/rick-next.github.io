@@ -33,7 +33,7 @@ export const Characters = ({ characters }: Props) => {
           key={c.id}
           characterImage={
             <CardMedia>
-              <Image src={c.image!} alt={c.name} height={256} width={256} />
+              <Image src={c.image!} alt={c.name} height={210} width={250} />
             </CardMedia>
           }
           characterBody={

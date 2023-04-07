@@ -34,6 +34,7 @@ const FilterCharactersPage = () => {
         display: 'flex',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
+        pt: '3rem',
       }}
     >
       <Characters characters={filteredCharacters} />

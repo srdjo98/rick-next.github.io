@@ -18,7 +18,14 @@ export const SelectInput = ({
   <FormControl sx={{ width: '120px', mr: '20px' }}>
     <Controller
       render={({ field }) => (
-        <Select sx={{ color: 'white' }} variant='standard' {...field}>
+        <Select
+          sx={{ color: 'white' }}
+          variant='standard'
+          MenuProps={{
+            disableScrollLock: true,
+          }}
+          {...field}
+        >
           {menuItems.map((m) => (
             <MenuItem key={m.label} value={m.value}>
               {m.label}
